@@ -20,6 +20,9 @@
   
   environment.systemPackages = with pkgs; [
     usbutils
+    usb-modeswitch
+    usbmuxd
+    gparted
     git
   ];
 }
