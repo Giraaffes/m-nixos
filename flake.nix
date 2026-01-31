@@ -25,12 +25,10 @@
     mkSystem = hostConfig: pkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        home-manager.nixosModules.home-manager
-        {
-          nixpkgs.config.allowUnfree = true;
-          home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
-        }
+        { nixpkgs.config.allowUnfree = true; }
         nur.modules.nixos.default
+        home-manager.nixosModules.home-manager
+        { home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ]; }
         ./common/configuration.nix
         hostConfig
       ];
@@ -39,5 +37,13 @@
   {
     nixosConfigurations.marcus-mor = mkSystem ./hosts/marcus-mor/configuration.nix;
     nixosConfigurations.acto = mkSystem ./hosts/acto/configuration.nix;
+
+    nixosConfigurations.installer = pkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        "${pkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        ./installer/installer.nix
+      ];
+    };
   };
 }

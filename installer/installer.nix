@@ -1,7 +1,5 @@
-{ config, pkgs, modulesPath, ... }: {
-  imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-  ];
+{ config, pkgs, ... }: {
+  boot.supportedFilesystems = pkgs.lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
 
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
@@ -11,6 +9,7 @@
   console.keyMap = "dk";
   
   networking.networkmanager.enable = true;
+
   hardware.usb-modeswitch.enable = true;
   services.usbmuxd.enable = true;
 
@@ -22,7 +21,6 @@
     usbutils
     usb-modeswitch
     usbmuxd
-    gparted
     git
   ];
 }
