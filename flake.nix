@@ -36,6 +36,7 @@
   in
   {
     nixosConfigurations.marcus-mor = mkSystem ./hosts/marcus-mor/configuration.nix;
+    nixosConfigurations.marcus-far = mkSystem ./hosts/marcus-far/configuration.nix;
     nixosConfigurations.acto = mkSystem ./hosts/acto/configuration.nix;
 
     nixosConfigurations.installer = pkgs.lib.nixosSystem {
