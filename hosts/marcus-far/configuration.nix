@@ -11,7 +11,7 @@
   hardware.usb-modeswitch.enable = true;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821cu
+    rtl8821au
   ];
   
   environment.systemPackages = with pkgs; [
