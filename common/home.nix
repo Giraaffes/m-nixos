@@ -22,7 +22,7 @@
 
     home.packages = with pkgs; [
       firefox slack # Default applications
-      vscode nodejs pnpm dbeaver-bin postgresql # Dev environment
+      vscode nodejs pnpm dbeaver-bin postgresql gitkraken # Dev environment
       prisma-engines_7 openssl # For Prisma
       gimp2 jq # Others
 
