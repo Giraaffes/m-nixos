@@ -20,12 +20,18 @@
   programs.gh.enable = true;
 
   home.packages = with pkgs; [
-    firefox slack # Default applications
-    vscode nodejs pnpm dbeaver-bin postgresql gitkraken # Dev environment
-    prisma-engines_7 openssl # For Prisma
-    gimp2 jq # Others
+    # Default applications
+    firefox slack
 
-    ventoy-full-qt # For Nix .iso installer
+    # Dev environment
+    vscode nodejs pnpm dbeaver-bin postgresql gitkraken
+    prisma-engines_7 openssl # For Prisma
+    
+    # Others
+    gimp2 jq 
+
+    # For Nix .iso installer
+    ventoy-full-qt
   ];
 
   home.sessionVariables = {
