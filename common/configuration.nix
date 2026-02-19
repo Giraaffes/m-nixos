@@ -1,9 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, hostName, resolve, ... }:
 {
-  imports = [
-    ./home.nix
-  ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader = {
@@ -14,6 +10,10 @@
   };
 
   swapDevices = [{ device = "/swapfile"; size = 8 * 1024; }];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-qt5-1.1.10"
+  ];
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -42,9 +42,11 @@
     shell = pkgs.bash;
   };
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit hostName; inherit resolve; };
+  home-manager.users.marcus = {
+    imports = [ ./home/home.nix ];
   };
 
   system.stateVersion = "26.05";

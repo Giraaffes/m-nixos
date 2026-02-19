@@ -1,6 +1,6 @@
 { ... }:
 {
-    programs.plasma.configFile."klassy/klassyrc" = {
+	programs.plasma.configFile."klassy/klassyrc" = {
 		"ButtonBehaviour" = {
 			"ShowCloseOutlineOnHoverActive" = "false";
 			"ShowCloseOutlineOnHoverInactive" = "false";
@@ -61,5 +61,5 @@
 			"ThinWindowOutlineStyleActive" = "WindowOutlineContrast";
 			"ThinWindowOutlineThickness" = "1.75";
 		};
-    };
+	};
 }

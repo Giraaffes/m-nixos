@@ -18,11 +18,5 @@
     usbutils
     usb-modeswitch
   ];
-
-  home-manager.users.marcus.home.shellAliases = {
-    rebuild = "sudo nixos-rebuild switch --flake ~/nixos#marcus-far";
-    rebuild-logout = "sudo nixos-rebuild switch --flake ~/nixos#marcus-far && qdbus org.kde.Shutdown /Shutdown logout";
-    rebuild-reboot = "sudo nixos-rebuild boot --flake ~/nixos#marcus-far && reboot";
-  };
 }
 

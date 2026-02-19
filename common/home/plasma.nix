@@ -1,9 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, resolve, ... }:
 {
-  imports = [
-    ./klassy.nix
-  ];
-
   home.packages = [
     pkgs.nur.repos.shadowrz.klassy-qt6
   ];
@@ -17,6 +13,7 @@
     windowDecorations.library = "org.kde.klassy";
     windowDecorations.theme = "Klassy";
     cursor.theme = "Breeze_Light";
+    wallpaper = resolve "resources/wallpaper.jpg";
   };
 
   programs.plasma.kwin = {

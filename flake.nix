@@ -22,29 +22,35 @@
 
   outputs = { pkgs, home-manager, plasma-manager, nur, ... }:
   let
-    mkSystem = hostConfig: pkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        { nixpkgs.config.allowUnfree = true; }
-        nur.modules.nixos.default
-        home-manager.nixosModules.home-manager
-        { home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ]; }
-        ./common/configuration.nix
-        hostConfig
-      ];
-    };
+    resolve = path: ./. + ("/" + path);
+    mkSystems = configAttrs: builtins.mapAttrs (
+      hostName: hostConfig: pkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit hostName; inherit resolve; };
+        modules = [
+          { nixpkgs.config.allowUnfree = true; }
+          nur.modules.nixos.default
+          home-manager.nixosModules.home-manager
+          { home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ]; }
+          ./common/configuration.nix
+          hostConfig
+        ];
+      }
+    ) configAttrs;
   in
   {
-    nixosConfigurations.marcus-mor = mkSystem ./hosts/marcus-mor/configuration.nix;
-    nixosConfigurations.marcus-far = mkSystem ./hosts/marcus-far/configuration.nix;
-    nixosConfigurations.acto = mkSystem ./hosts/acto/configuration.nix;
-
-    nixosConfigurations.installer = pkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        "${pkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-        ./installer/installer.nix
-      ];
+    nixosConfigurations = mkSystems {
+      marcus-mor = ./hosts/marcus-mor/configuration.nix;
+      marcus-far = ./hosts/marcus-far/configuration.nix;
+      acto = ./hosts/acto/configuration.nix;
+    } // {
+      installer = pkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${pkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ./installer/installer.nix
+        ];
+      };
     };
   };
 }
