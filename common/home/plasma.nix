@@ -172,11 +172,17 @@ in
         }
         {
           digitalClock = {
+            time.format = "24h";
             date = {
               enable = true;
-              format = "shortDate";
+              format = {
+                custom = "d/M/yyyy";
+              };
             };
-            time.format = "24h";
+            calendar = {
+              firstDayOfWeek = "monday";
+              showWeekNumbers = true;
+            };
           };
         }
         "org.kde.plasma.minimizeall"
