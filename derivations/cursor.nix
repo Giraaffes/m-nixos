@@ -1,9 +1,9 @@
-{ pkgs, name, fontPath, ... }:
+{ pkgs, name, cursorName, cursorPath, ... }:
 pkgs.stdenvNoCC.mkDerivation {
   pname = name;
   version = "1.0";
 
-  src = fontPath;
+  src = cursorPath;
 
   dontConfigure = true;
   dontBuild = true;
@@ -11,8 +11,8 @@ pkgs.stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
     
-    mkdir -p $out/share/fonts/truetype
-    cp -a *.ttf $out/share/fonts/truetype/
+    mkdir -p $out/share/icons/${cursorName}
+    cp -a * $out/share/icons/${cursorName}/
     
     runHook postInstall
   '';

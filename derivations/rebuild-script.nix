@@ -10,7 +10,7 @@ pkgs.writeShellApplication {
         "--logout")
           DO_LOGOUT=true
           ;;
-        "--reboot")
+        "--reboot"|"--restart")
           DO_REBOOT=true
           ;;
       esac

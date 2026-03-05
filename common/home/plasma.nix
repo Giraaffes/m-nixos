@@ -2,14 +2,21 @@
 let
   segoeFont = import (resolve "derivations/font.nix") {
     inherit pkgs;
-    fontName = "segoe-ui";
+    name = "segoe-ui-font";
     fontPath = resolve "resources/segoe/";
+  };
+  aeroCursor = import (resolve "derivations/cursor.nix") {
+    inherit pkgs;
+    name = "aero-cursor";
+    cursorName = "Aero";
+    cursorPath = resolve "resources/aero/";
   };
 in
 {
   home.packages = [
     pkgs.nur.repos.shadowrz.klassy-qt6
     segoeFont
+    aeroCursor
   ];
 
   fonts.fontconfig = {
@@ -28,8 +35,12 @@ in
     theme = "breeze-dark";
     windowDecorations.library = "org.kde.klassy";
     windowDecorations.theme = "Klassy";
-    cursor.theme = "Breeze_Light";
     wallpaper = resolve "resources/wallpaper.jpg";
+    cursor = {
+      theme = "Aero";
+      size = 32;
+      cursorFeedback = "None";
+    };
   };
 
   programs.plasma.fonts = {
@@ -72,6 +83,7 @@ in
   programs.plasma.configFile."kdeglobals" = {
     "KDE" = {
       "AnimationDurationFactor" = 0.5;
+      "DndBehavior" = "MoveIfSameDevice";
     };
     #"General" = {
     #  "XftAntialias" = true;
