@@ -17,6 +17,7 @@ in
     antialiasing = true;
     hinting = "slight";
   };
+  # It will complain if we don't force override this file
   xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
 
   programs.plasma.enable = true;
