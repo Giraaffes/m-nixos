@@ -1,8 +1,23 @@
 { pkgs, resolve, ... }:
+let
+  segoeFont = import (resolve "derivations/font.nix") {
+    inherit pkgs;
+    fontName = "segoe-ui";
+    fontPath = resolve "resources/segoe/";
+  };
+in
 {
   home.packages = [
     pkgs.nur.repos.shadowrz.klassy-qt6
+    segoeFont
   ];
+
+  fonts.fontconfig = {
+    enable = true;
+    antialiasing = true;
+    hinting = "slight";
+  };
+  xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
 
   programs.plasma.enable = true;
   # programs.plasma.overrideConfig = true;
@@ -16,15 +31,52 @@
     wallpaper = resolve "resources/wallpaper.jpg";
   };
 
+  programs.plasma.fonts = {
+    general = {
+      family = "Segoe UI";
+      pointSize = 10;
+    };
+    small = {
+      family = "Segoe UI";
+      pointSize = 8;
+    };
+    toolbar = {
+      family = "Segoe UI";
+      pointSize = 10;
+    };
+    menu = {
+      family = "Segoe UI";
+      pointSize = 10;
+    };
+    windowTitle = {
+      family = "Segoe UI";
+      pointSize = 10;
+    };
+  };
+
   programs.plasma.kwin = {
     effects.shakeCursor.enable = false;
   };
-
-  # Disables top left corner action
   programs.plasma.configFile."kwinrc" = {
-    "Effect-overview" = {
-      "BorderActivate" = "9";
+    "TabBox" = {
+      "DelayTime" = 0;
+      "HighlightWindows" = false;
     };
+    # Disables top left corner action
+    "Effect-overview" = {
+      "BorderActivate" = 9;
+    };
+  };
+
+  programs.plasma.configFile."kdeglobals" = {
+    "KDE" = {
+      "AnimationDurationFactor" = 0.5;
+    };
+    #"General" = {
+    #  "XftAntialias" = true;
+    #  "XftHintStyle" = "hintslight";
+    #  "XftSubPixel" = "rgb";
+    #};
   };
 
   programs.plasma.powerdevil.AC = {

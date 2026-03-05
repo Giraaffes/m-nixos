@@ -28,6 +28,9 @@ pkgs.writeShellApplication {
       elif [[ "$DO_REBOOT" == "true" ]]; then
         echo "Rebooting..."
         systemctl reboot
+      else
+        echo "Starting plasmashell..."
+        systemctl --user start plasma-plasmashell.service
       fi
     else
       echo "Build failed! Starting plasmashell..."
