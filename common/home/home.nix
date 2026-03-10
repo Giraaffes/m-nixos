@@ -1,4 +1,4 @@
-{ pkgs, hostName, resolve, ... }:
+{ pkgs, hostName, resolve, pkgsUnstable, ... }:
 {
   imports = [
     ./plasma.nix
@@ -25,6 +25,7 @@
 
     # Dev environment
     vscode nodejs pnpm dbeaver-bin postgresql gitkraken
+    pkgsUnstable.antigravity
     prisma-engines_7 openssl # For Prisma
     
     # Others

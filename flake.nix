@@ -5,6 +5,9 @@
     pkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    pkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "pkgs";
@@ -20,13 +23,17 @@
     };
   };
 
-  outputs = { pkgs, home-manager, plasma-manager, nur, ... }:
+  outputs = { pkgs, pkgs-unstable, home-manager, plasma-manager, nur, ... }:
   let
+    pkgsUnstable = import pkgs-unstable {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
     resolve = path: ./. + ("/" + path);
     mkSystems = configAttrs: builtins.mapAttrs (
       hostName: hostConfig: pkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit hostName; inherit resolve; };
+        specialArgs = { inherit hostName; inherit resolve; inherit pkgsUnstable; };
         modules = [
           { nixpkgs.config.allowUnfree = true; }
           nur.modules.nixos.default

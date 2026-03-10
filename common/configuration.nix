@@ -1,4 +1,4 @@
-{ pkgs, hostName, resolve, ... }:
+{ pkgs, hostName, resolve, pkgsUnstable, ... }:
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -44,7 +44,7 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit hostName; inherit resolve; };
+  home-manager.extraSpecialArgs = { inherit hostName; inherit resolve; inherit pkgsUnstable; };
   home-manager.users.marcus = {
     imports = [ ./home/home.nix ];
   };
