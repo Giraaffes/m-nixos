@@ -12,6 +12,7 @@
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl8821au
+    rtl8821cu
   ];
   
   environment.systemPackages = with pkgs; [
