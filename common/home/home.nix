@@ -25,7 +25,7 @@
 
     # Dev environment
     vscode nodejs pnpm dbeaver-bin postgresql gitkraken
-    pkgsUnstable.antigravity
+    pkgsUnstable.claude-code
     prisma-engines_7 openssl # For Prisma
     
     # Others
