@@ -21,18 +21,18 @@
 
   home.packages = with pkgs; [
     # Default applications
-    firefox slack
+    firefox slack kdePackages.filelight
 
-    # Dev environment
+    # Development
     vscode nodejs pnpm dbeaver-bin postgresql gitkraken
     pkgsUnstable.claude-code
     prisma-engines_7 openssl # For Prisma
     
     # Others
-    gimp2 jq 
+    gimp2
 
     # For Nix .iso installer
-    ventoy-full-qt
+    #ventoy-full-qt
   ];
 
   home.sessionVariables = {
