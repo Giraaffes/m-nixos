@@ -25,13 +25,13 @@
 
   outputs = { pkgs, pkgs-unstable, home-manager, plasma-manager, nur, ... }:
   let
+    resolve = path: ./. + ("/" + path);
     pkgsUnstable = import pkgs-unstable {
       system = "x86_64-linux";
       config.allowUnfree = true;
     };
-    resolve = path: ./. + ("/" + path);
-    mkSystems = configAttrs: builtins.mapAttrs (
-      hostName: hostConfig: pkgs.lib.nixosSystem {
+    mkSystems = hosts: builtins.mapAttrs (
+      hostName: hostModules: pkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit hostName; inherit resolve; inherit pkgsUnstable; };
         modules = [
@@ -39,17 +39,26 @@
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           { home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ]; }
-          ./common/configuration.nix
-          hostConfig
-        ];
+        ] ++ hostModules;
       }
-    ) configAttrs;
+    ) hosts;
   in
   {
     nixosConfigurations = mkSystems {
-      marcus-mor = ./hosts/marcus-mor/configuration.nix;
-      marcus-far = ./hosts/marcus-far/configuration.nix;
-      acto = ./hosts/acto/configuration.nix;
+      marcus-mor = [
+        ./modules/common/configuration.nix
+        ./modules/marcus/configuration.nix
+        ./modules/marcus-mor/configuration.nix
+      ];
+      marcus-far = [
+        ./modules/common/configuration.nix
+        ./modules/marcus/configuration.nix
+        ./modules/marcus-mor/configuration.nix
+      ];
+      acto = [
+        ./modules/common/configuration.nix
+        ./modules/acto/configuration.nix
+      ];
     } // {
       installer = pkgs.lib.nixosSystem {
         system = "x86_64-linux";
