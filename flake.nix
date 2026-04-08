@@ -53,7 +53,7 @@
       marcus-far = [
         ./modules/common/configuration.nix
         ./modules/marcus/configuration.nix
-        ./modules/marcus-mor/configuration.nix
+        ./modules/marcus-far/configuration.nix
       ];
       acto = [
         ./modules/common/configuration.nix
