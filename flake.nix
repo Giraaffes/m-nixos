@@ -64,7 +64,14 @@
         system = "x86_64-linux";
         modules = [
           "${pkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./installer/installer.nix
+          ./installer/configuration.nix
+        ];
+      };
+      server = pkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${pkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
+          ./server/configuration.nix
         ];
       };
     };
