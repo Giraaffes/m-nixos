@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     git
+    nodejs pnpm
   ];
 
   system.stateVersion = "26.05";
