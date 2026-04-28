@@ -9,8 +9,6 @@
     grub.useOSProber = true;
   };
 
-  swapDevices = [{ device = "/swapfile"; size = 8 * 1024; }];
-
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-qt5-1.1.10"
   ];

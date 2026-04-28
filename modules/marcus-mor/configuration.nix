@@ -4,6 +4,8 @@
     ./hardware-configuration.nix
   ];
 
+  swapDevices = [{ device = "/swapfile"; size = 1 * 1024; }];
+
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "marcus-mor";
