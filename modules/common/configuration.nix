@@ -4,7 +4,7 @@
 
   boot.loader = {
     systemd-boot.enable = false;
-    timeout = 3;
+    timeout = null;
     grub.enable = true;
     grub.useOSProber = true;
   };
