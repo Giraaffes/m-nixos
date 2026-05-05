@@ -27,6 +27,7 @@
     vscode nodejs pnpm dbeaver-bin postgresql gitkraken
     pkgsUnstable.claude-code
     prisma-engines_7 openssl # For Prisma
+    stripe-cli
     
     # Others
     gimp2
