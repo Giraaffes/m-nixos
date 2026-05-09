@@ -5,18 +5,18 @@ let
     name = "segoe-ui-font";
     fontPath = resolve "resources/segoe/";
   };
-  aeroCursor = import (resolve "derivations/cursor.nix") {
-    inherit pkgs;
-    name = "aero-cursor";
-    cursorName = "Aero";
-    cursorPath = resolve "resources/aero/";
-  };
+  #aeroCursor = import (resolve "derivations/cursor.nix") {
+  #  inherit pkgs;
+  #  name = "aero-cursor";
+  #  cursorName = "Aero";
+  #  cursorPath = resolve "resources/aero/";
+  #};
 in
 {
   home.packages = [
     pkgs.nur.repos.shadowrz.klassy-qt6
     segoeFont
-    aeroCursor
+    #aeroCursor
   ];
 
   fonts.fontconfig = {
@@ -37,8 +37,10 @@ in
     windowDecorations.theme = "Klassy";
     wallpaper = resolve "resources/wallpaper-sequoia.png";
     cursor = {
-      theme = "Aero";
-      size = 32;
+      #theme = "Aero";
+      #size = 32;
+      theme = "Breeze_Light";
+      size = 24;
       cursorFeedback = "None";
     };
   };
