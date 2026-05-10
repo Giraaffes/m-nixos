@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
+  i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Copenhagen";
-  i18n.defaultLocale = "da_DK.UTF-8";
 
   networking.networkmanager.enable = true;
 

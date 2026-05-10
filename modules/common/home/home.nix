@@ -19,6 +19,19 @@
   ];
   programs.gh.enable = true;
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "elephant" = {
+        hostname = "46.101.155.176";
+        user = "root";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_elephant";
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     # Default applications
     firefox slack kdePackages.filelight
