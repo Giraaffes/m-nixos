@@ -1,11 +1,11 @@
 { pkgs, hostName, resolve, ... }:
 let
-  rebuild-script = import (resolve "derivations/rebuild-script.nix") {
+  rebuild-script = import (resolve "pkgs/rebuild-script.nix") {
     inherit pkgs;
     flakePath = "/home/marcus/nixos";
     configName = hostName;
   };
-  rebuild-server-script = import (resolve "derivations/rebuild-server-script.nix") {
+  rebuild-server-script = import (resolve "pkgs/rebuild-server-script.nix") {
     inherit pkgs;
     flakePath = "/home/marcus/nixos";
   };

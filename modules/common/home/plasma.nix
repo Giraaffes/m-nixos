@@ -1,11 +1,11 @@
 { pkgs, resolve, ... }:
 let
-  segoeFont = import (resolve "derivations/font.nix") {
+  segoeFont = import (resolve "pkgs/segoe-font.nix") {
     inherit pkgs;
     name = "segoe-ui-font";
     fontPath = resolve "resources/segoe/";
   };
-  #aeroCursor = import (resolve "derivations/cursor.nix") {
+  #aeroCursor = import (resolve "pkgs/aero-cursor.nix") {
   #  inherit pkgs;
   #  name = "aero-cursor";
   #  cursorName = "Aero";
@@ -28,7 +28,6 @@ in
   xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
 
   programs.plasma.enable = true;
-  # programs.plasma.overrideConfig = true;
 
   programs.plasma.workspace = {
     colorScheme = "KlassyLight";
