@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
   ];
 
-  swapDevices = [{ device = "/swapfile"; size = 1 * 1024; }];
+  swapDevices = [{ device = "/swapfile"; size = 8 * 1024; }];
 
   boot.loader.grub.device = "/dev/sda";
 
@@ -24,7 +24,5 @@
     usbutils
     usb-modeswitch
   ];
-
-  services.xserver.enable = true;
 }
 

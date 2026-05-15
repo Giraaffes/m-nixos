@@ -1,8 +1,13 @@
 { pkgs, pkgsUnstable, resolve, ... }:
 let
-  rclone-master = import (resolve "pkgs/rclone-master.nix") { inherit pkgsUnstable; };
+  rclone-mount = import (resolve "lib/rclone-mount.nix") { pkgs = pkgsUnstable; };
+  inherit (rclone-mount) mkRcloneMount;
 in
 {
+  imports = [
+    ./scripts.nix
+  ];
+
   xdg.configFile."baloofilerc" = {
     text = ''
       [Basic Settings]
@@ -13,28 +18,26 @@ in
 
   home.packages = with pkgs; [
     prismlauncher
-    rclone-master
+    pkgsUnstable.rclone
+    keepassxc
   ];
 
-  systemd.user.services.icloud-mount = {
-    Unit = {
-      Description = "Mount iCloud Drive via Rclone";
-      After = [ "network-online.target" ];
-    };
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentry.package = pkgs.pinentry-qt;
+  };
 
-    Install = {
-      WantedBy = [ "default.target" ];
+  systemd.user.services = {
+    "icloud-mount" = mkRcloneMount {
+      name = "iCloud Drive";
+      remote = "icloud:";
+      mountDir = "%h/iCloud";
     };
-
-    Service = {
-      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/iCloud";
-      ExecStart = "${rclone-master}/bin/rclone mount icloud: %h/iCloud --vfs-cache-mode full";
-      ExecStop = "${pkgs.fuse}/bin/fusermount -u %h/iCloud";
-      
-      Restart = "on-failure";
-      RestartSec = "10s";
-      
-      Environment = "PATH=${rclone-master}/bin:${pkgs.coreutils}/bin:/run/wrappers/bin";
+    "gdrive-mount" = mkRcloneMount {
+      name = "Google Drive";
+      remote = "google:";
+      mountDir = "%h/drive";
     };
   };
 

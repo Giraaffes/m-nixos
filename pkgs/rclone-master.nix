@@ -1,3 +1,4 @@
+# DEPRECATED - Fix for iCloud drive authentication was added in v1.74.0
 { pkgsUnstable }:
 pkgsUnstable.rclone.overrideAttrs (finalAttrs: prevAttrs: {
   version = "master";
