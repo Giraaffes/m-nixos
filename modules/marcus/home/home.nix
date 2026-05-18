@@ -8,14 +8,6 @@ in
     ./scripts.nix
   ];
 
-  xdg.configFile."baloofilerc" = {
-    text = ''
-      [Basic Settings]
-      Indexing-Enabled=false
-    '';
-    force = true;
-  };
-
   home.packages = with pkgs; [
     prismlauncher
     pkgsUnstable.rclone
@@ -26,6 +18,25 @@ in
   services.gpg-agent = {
     enable = true;
     pinentry.package = pkgs.pinentry-qt;
+  };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "elephant" = {
+        hostname = "46.101.155.176";
+        user = "root";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_elephant";
+      };
+      "pi" = {
+        hostname = "192.168.1.13";
+        user = "marcus";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_pi";
+      };
+    };
   };
 
   systemd.user.services = {
@@ -39,6 +50,14 @@ in
       remote = "google:";
       mountDir = "%h/drive";
     };
+  };
+
+  xdg.configFile."baloofilerc" = {
+    text = ''
+      [Basic Settings]
+      Indexing-Enabled=false
+    '';
+    force = true;
   };
 
   home.stateVersion = "25.11";
