@@ -4,9 +4,7 @@
 
   boot.loader = {
     systemd-boot.enable = false;
-    timeout = null;
     grub.enable = true;
-    grub.useOSProber = true;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -34,11 +32,14 @@
 
   virtualisation.docker.enable = true;
 
+  programs.nix-ld.enable = true;
+
   users.users.marcus = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
     shell = pkgs.bash;
   };
+  nix.settings.trusted-users = [ "root" "marcus" ];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
