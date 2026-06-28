@@ -16,4 +16,6 @@
   #    Allow = [ "127.0.0.1" "100.64.0.0/10" ];
   #  };
   #};
+
+  networking.firewall.allowedTCPPorts = [ 3000 ];
 }
