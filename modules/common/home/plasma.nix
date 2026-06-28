@@ -34,7 +34,7 @@ in
     theme = "breeze-dark";
     windowDecorations.library = "org.kde.klassy";
     windowDecorations.theme = "Klassy";
-    wallpaper = resolve "resources/wallpaper-sequoia.png";
+    wallpaper = resolve "resources/wallpaper-field.jpg";
     cursor = {
       #theme = "Aero";
       #size = 32;

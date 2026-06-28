@@ -1,9 +1,11 @@
 { pkgs, hostName, resolve, pkgsUnstable, ... }:
 {
   imports = [
+    ./scripts.nix
     ./plasma.nix
     ./klassy.nix
-    ./scripts.nix
+    ./spectacle.nix
+    ./dolphin.nix
   ];
 
   programs.bash.enable = true;
