@@ -34,7 +34,7 @@
     image = "localhost:5000/m-notifications:latest";
     environment = {
       STORAGE_PATH = "/home/node/app/storage";
-      PROXY_URL = "http://100.68.116.82:8888";
+      PROXY_URL = "http://100.91.112.112:8888";
       NODE_ENV = "production";
     };
     volumes = [
