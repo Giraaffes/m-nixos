@@ -26,8 +26,7 @@
     firefox slack kdePackages.filelight
 
     # Development
-    vscode nodejs pnpm dbeaver-bin postgresql gitkraken
-    pkgsUnstable.claude-code
+    vscode nodejs pnpm yarn dbeaver-bin postgresql gitkraken
     prisma-engines_7 openssl # For Prisma
     stripe-cli
     
